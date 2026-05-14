@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ character.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="top-nav">
+            <a class="brand" href="/">
+                <span class="brand-mark">✦</span>
+                <span>Character Forge</span>
+            </a>
+
+            <nav>
+                <a href="/">Создание</a>
+                <a href="/characters">Мои персонажи</a>
+                <a href="/logout">Выйти</a>
+            </nav>
+        </header>
+
+        <main class="detail-layout">
+            <section class="portrait-section">
+                <div class="portrait-frame">
+                    <img
+                        src="{{ url_for('static', filename=character_image, v=image_version) }}"
+                        alt="Иллюстрация персонажа {{ character.name }}"
+                    >
+                </div>
+
+                <div class="portrait-info">
+                    <p>Автоматически созданная иллюстрация</p>
+                    <strong>{{ character.character_class }} · {{ character.race }}</strong>
+
+                    <form method="post" action="/characters/{{ character.id }}/regenerate-image">
+                        <button type="submit">Сгенерировать новую иллюстрацию</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="character-panel">
+                <p class="eyebrow">CHARACTER CARD</p>
+
+                <h1>{{ character.name }}</h1>
+
+                <div class="character-meta">
+                    <div>
+                        <span>Класс</span>
+                        <strong>{{ character.character_class }}</strong>
+                    </div>
+
+                    <div>
+                        <span>Раса</span>
+                        <strong>{{ character.race }}</strong>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span>Сила</span>
+                        <strong>{{ character.strength }}/10</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Интеллект</span>
+                        <strong>{{ character.intelligence }}/10</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Ловкость</span>
+                        <strong>{{ character.agility }}/10</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>Магия</span>
+                        <strong>{{ character.magic }}/10</strong>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h3>Описание</h3>
+                    <p>{{ character.description }}</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Цель</h3>
+                    <p>{{ character.goal }}</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Способности</h3>
+                    <p>{{ character.abilities }}</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Исходный запрос</h3>
+                    <p class="prompt-text">{{ character.source_prompt }}</p>
+                </div>
+
+                <div class="actions-row">
+                    <a class="button-link" href="/">Создать нового</a>
+                    <a class="button-link" href="/characters/{{ character.id }}/edit">Редактировать</a>
+                    <a class="button-link" href="/characters">Список</a>
+                    <a class="button-link" href="/characters/{{ character.id }}/export/txt">TXT</a>
+                    <a class="button-link" href="/characters/{{ character.id }}/export/pdf">PDF</a>
+
+                    <!-- НОВАЯ КНОПКА ДЛЯ AI-РЕДАКТИРОВАНИЯ -->
+                    <button class="button-link" id="showAiEditBtn" type="button">✨ Переделать через AI</button>
+
+                    <!-- СКРЫТАЯ ФОРМА ДЛЯ AI-РЕДАКТИРОВАНИЯ -->
+                    <div id="aiEditForm" style="display: none; margin-top: 20px; background: #1e1e2f; padding: 15px; border-radius: 16px; width: 100%;">
+                        <form method="post" action="/characters/{{ character.id }}/ai_edit">
+                            <label for="instruction" style="color: #fff;">Что изменить? (например, «сделай имя более мрачным, повысь магию до 9 и измени цель на месть»)</label>
+                            <textarea id="instruction" name="instruction" rows="3" style="width: 100%; margin: 10px 0; background: #2d2d3f; color: white; border: 1px solid #6c63ff; border-radius: 8px; padding: 8px;"></textarea>
+                            <div style="display: flex; gap: 10px;">
+                                <button type="submit">Отправить нейросети</button>
+                                <button type="button" id="cancelAiEdit">Отмена</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <form method="post" action="/characters/{{ character.id }}/delete" onsubmit="return confirm('Удалить этого персонажа?');">
+                        <button class="danger-button" type="submit">Удалить</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Простой скрипт для показа/скрытия формы AI-редактирования
+        document.getElementById('showAiEditBtn').onclick = function() {
+            var formDiv = document.getElementById('aiEditForm');
+            formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+        };
+        document.getElementById('cancelAiEdit').onclick = function() {
+            document.getElementById('aiEditForm').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
