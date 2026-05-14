@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Forge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="top-nav">
+            <a class="brand" href="/">
+                <span class="brand-mark">✦</span>
+                <span>Character Forge</span>
+            </a>
+
+            <nav>
+                <a href="/">Создание</a>
+                <a href="/characters">Мои персонажи</a>
+                <a href="/logout">Выйти</a>
+            </nav>
+        </header>
+
+        <main class="home-layout">
+            <section class="hero-section">
+                <div class="hero-content">
+                    <p class="eyebrow">AI RPG CHARACTER SYSTEM</p>
+
+                    <h1>Генератор игровых персонажей с anime-иллюстрациями</h1>
+
+                    <p class="hero-text">
+                        Опиши героя обычным текстом. Система создаст имя, класс, расу,
+                        характеристики, способности, цель и отдельную иллюстрацию персонажа.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button-link" href="/characters">Мои персонажи</a>
+                    </div>
+                </div>
+
+                <div class="floating-card card-one">
+                    <span>Магия</span>
+                    <strong>10/10</strong>
+                </div>
+
+                <div class="floating-card card-two">
+                    <span>Стиль</span>
+                    <strong>Anime RPG</strong>
+                </div>
+
+                <div class="floating-orb orb-one"></div>
+                <div class="floating-orb orb-two"></div>
+            </section>
+
+            <section class="generator-panel">
+                <div class="panel-header">
+                    <p>Пользователь: {{ current_user.username }}</p>
+                    <h2>Создать персонажа</h2>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <p class="message">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="post" action="/generate">
+                    <label for="prompt">Текстовое описание</label>
+
+                    <textarea
+                        id="prompt"
+                        name="prompt"
+                        rows="8"
+                        placeholder="Например: Создай эльфа-лучника, который живёт в лесу и защищает природу."
+                        required></textarea>
+
+                    <button type="submit">Сгенерировать персонажа</button>
+                </form>
+
+                <div class="hint-grid">
+                    <div>
+                        <strong>01</strong>
+                        <span>Анализ описания</span>
+                    </div>
+
+                    <div>
+                        <strong>02</strong>
+                        <span>Карточка героя</span>
+                    </div>
+
+                    <div>
+                        <strong>03</strong>
+                        <span>Anime-арт</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
