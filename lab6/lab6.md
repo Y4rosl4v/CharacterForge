@@ -16,4 +16,4 @@
 - Генерация изображения
 - Экспорт данных
 ### Видеодемонстрация
-### Папка с проектом
+https://drive.google.com/file/d/1C_i3Di9D74P7OLJchB-i4pCd-qXpkez2/view?usp=sharing
