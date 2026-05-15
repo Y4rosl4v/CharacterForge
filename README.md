@@ -19,11 +19,13 @@ Python, Flask, SQLAlchemy, AI API (OpenAI), HTML/CSS
 - Лабораторная работа 5: Реализация экспорта данных и финальная доработка
 - Лабораторная работа 6: Инструкция по запуску и демонстрация работы
 
+### Проект
+https://drive.google.com/file/d/1thOuXJMf6GL3OmKnoUIRdaitxwK-ChfT/view?usp=sharing
 ### Требования к системе
 - Python 3.8+
 - Библиотеки: Flask, SQLAlchemy, openai, python-dotenv, Pillow, fpdf
 ### Установка и настройка
-- Клонирование/создание проекта
+- Клонирование/создание проекта 
 - Установка зависимостей через pip
 - Настройка .env файла с API ключами
 ### Запуск приложения
