@@ -19,18 +19,23 @@ Python, Flask, SQLAlchemy, AI API (OpenAI), HTML/CSS
 - Лабораторная работа 5: Реализация экспорта данных и финальная доработка
 - Лабораторная работа 6: Инструкция по запуску и демонстрация работы
 
-### Проект
+# Инструкция по установке 
+### Проект (скачиваем с гугл диска)
 https://drive.google.com/file/d/1thOuXJMf6GL3OmKnoUIRdaitxwK-ChfT/view?usp=sharing
 ### Требования к системе
 - Python 3.8+
 - Библиотеки: Flask, SQLAlchemy, openai, python-dotenv, Pillow, fpdf
-### Установка и настройка
-- Клонирование/создание проекта 
-- Установка зависимостей через pip
-- Настройка .env файла с API ключами
+### Настройка
+- Открываем проект в VS Code 
+- Переходим в папку проекта `cd character_generator`
+- Создаем виртуальное окружение `python -m venv venv`
+- Активируем его `venv\Scripts\activate`
+- Устанавливаем зависимости `pip install -r requirements.txt`
+- Проверяем ключ в файле .env `POLLINATIONS_API_KEY=sk_4kxDv8fP9GJiHXbB9J7ZUyBxAhFylzNz`
+- Ctrl+S
 ### Запуск приложения
-- Команда запуска: python app.py
-- Первоначальная настройка базы данных
+- `python app.py`
+- В браузере открываем `http://127.0.0.1:5000`
 ### Демонстрация функционала
 - Регистрация пользователя
 - Генерация персонажа
